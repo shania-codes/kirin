@@ -1,4 +1,4 @@
-# Kirin
+# Kirinify
 A comfy, autumn themed music player which stores songs locally AND on the server it's hosted on, therefore it works offline. Furthermore you can modify the metadata of the music files (such as genre,artist,album name, release date, etc...). Also you can add tags to group them and modularly create playlists for example you might have a tag for My Little Pony music and another tag for high BPM songs then you can on the spot create a song queue comprised only of MLP songs that are also high BPM (or a specific genre, mood, etc).
 
 ## Features
@@ -20,3 +20,18 @@ A comfy, autumn themed music player which stores songs locally AND on the server
 - Support streaming from cloud services and other websites (for example: youtube, onedrive, dropbox etc...)
 
 
+
+# Set up instructions
+Backend: Flask
+Frontend: Jinja2 + HTML + CSS + JS  
+Desktop: PySide6
+
+Set up commands:
+```bash
+git clone https://github.com/shania-codes/kirinify  
+cd kirinify  
+python3 -m venv venv  
+source venv/bin/activate  
+pip install flask  
+flask run  
+```

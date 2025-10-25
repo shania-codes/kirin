@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-import sqlite3
 import os
 from werkzeug.utils import secure_filename
 
@@ -14,22 +13,6 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True) # Create upload folder if it doesn't e
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
-def get_db():
-    db = sqlite3.connect("data.db")
-    return db
-def create_db():
-    db = get_db()
-    cursor = db.cursor()
-
-    # Create tables
-    ## "Queue" (There MUST be a better way to do this?)
-    #cursor.execute("CREATE TABLE IF NOT EXISTS queue (id INTEGER PRIMARY KEY AUTOINCREMENT, file TEXT NOT NULL)")
-
-    db.commit()
-    db.close()
-create_db()
 
 
 @app.route("/", methods=["GET", "POST"])

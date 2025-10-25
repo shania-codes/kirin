@@ -5,10 +5,12 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = "worst_admin"
-UPLOAD_FOLDER = "static/music"
-ALLOWED_EXTENSIONS = {"aac", "flac", "m4a", "mp3", "oog", "opus", "wav"} # https://en.wikipedia.org/wiki/Audio_file_format https://www.iana.org/assignments/media-types/media-types.xhtml#audio
+UPLOAD_FOLDER = "static"
+ALLOWED_EXTENSIONS = {"aac", "flac", "m4a", "mp3", "ogg", "opus", "wav"} # https://en.wikipedia.org/wiki/Audio_file_format https://www.iana.org/assignments/media-types/media-types.xhtml#audio
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
+os.makedirs(UPLOAD_FOLDER, exist_ok=True) # Create upload folder if it doesn't exist
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -40,9 +42,20 @@ def index():
         elif file and allowed_file(file.filename): # If the file exists and it has an allowed name and file extension then save it
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            # TODO replace file name with hash of the file to support images that are the same not being duplicated and images of the same name but are different not overwriting each other
+            # TODO make sure a file with the same name doesn't exist and get's replaced by new file (this also wastes bandwidth)
 
 
     
 
-    return render_template("index.html")
+    return render_template("index.html", files=get_uploaded_files())
+
+
+# Other Functions
+def get_uploaded_files():
+    files = []
+    for filename in os.listdir(UPLOAD_FOLDER):
+        if allowed_file(filename):
+            files.append(filename)
+    return files
+
+get_uploaded_files()

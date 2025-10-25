@@ -18,9 +18,16 @@ Kirinify
 </form>
 
 
-<br><h2>Play</h2>
+<br><h2>Playing</h2>
 
 
-<br><h2>Queue</h2>
+<br><h2>File List</h2>
+<ul>
+{% for file in files %}
+    <li>{{file}}</li><br>
+{% endfor %}
+</ul>
+
+
 
 {% endblock %}

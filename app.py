@@ -24,8 +24,8 @@ def create_db():
     cursor = db.cursor()
 
     # Create tables
-    ## table1
-    #cursor.execute("")
+    ## "Queue" (There MUST be a better way to do this?)
+    #cursor.execute("CREATE TABLE IF NOT EXISTS queue (id INTEGER PRIMARY KEY AUTOINCREMENT, file TEXT NOT NULL)")
 
     db.commit()
     db.close()

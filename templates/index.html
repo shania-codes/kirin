@@ -18,8 +18,17 @@ Kirinify
 </form>
 
 
-<br><h2>Playing</h2>
-
+<br><h2>Now Playing</h2>
+<div id="now_playing">
+    <audio id="current_song" controls autoplay></audio>
+</div>
+<style>
+    #current_song {
+        border: solid brown 8px;
+        /*padding: 0px;*/
+        border-radius: 90px;
+    }
+</style>
 
 <br><h2>File List</h2>
 <ul>
@@ -34,11 +43,20 @@ Kirinify
 <ul>
 {% for song in queue %}
     <li>{{song}}</li>
-    Add id=song_{id}, remove from queue button, move up/down in queue buttons
+    Add id=song_{id}, play button, add/remove from queue button, move up/down in queue buttons
     <br>
 {% endfor %}
 </ul>
 #}
+
+
+
+
+
+<script>
+    const current_song = document.getElementById("current_song");
+    current_song.src = "./static/{{files[0]}}"; // Set current song to the first file (sorted by ?alphabetical?)
+</script>
 
 
 {% endblock %}

@@ -8,7 +8,6 @@ A comfy, autumn themed music player which stores songs locally AND on the server
 - Actually play music files  
 
 ### Planned Features
-- Modify metadata of those files (to change genre and other song details)  
 - Add tags to songs  
 - Add all songs with a certain tag to queue (aka create playlists)  
 - Add all songs with multiple tags to queue (songs with tag1 AND tag2 only)  
@@ -17,6 +16,7 @@ A comfy, autumn themed music player which stores songs locally AND on the server
 - Built in archive button to "delete" songs you don't like anymore (can be undone).  
 
 <!--
+- Modify metadata of those files (to change genre and other song details)  
 - Be able to compress songs to lower quality versions  
 - Built in A B testing to see if you can actually tell the difference between compressed and non compressed versions  
 - Support streaming from cloud services and other websites (for example: youtube, onedrive, dropbox etc...)

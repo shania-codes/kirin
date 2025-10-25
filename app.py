@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 app.secret_key = "worst_admin"
 UPLOAD_FOLDER = "static"
-ALLOWED_EXTENSIONS = {"aac", "flac", "m4a", "mp3", "ogg", "opus", "wav"} # https://en.wikipedia.org/wiki/Audio_file_format https://www.iana.org/assignments/media-types/media-types.xhtml#audio
+ALLOWED_EXTENSIONS = {"flac", "mp3"} # https://en.wikipedia.org/wiki/Audio_file_format https://www.iana.org/assignments/media-types/media-types.xhtml#audio
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 

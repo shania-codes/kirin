@@ -5,9 +5,9 @@ A comfy, autumn themed music player which stores songs locally AND on the server
 - Comfy Autumn theme  
 - Save music files to server
 - List all music files 
+- Actually play music files  
 
 ### Planned Features
-- Actually play music files
 - Modify metadata of those files (to change genre and other song details)  
 - Add tags to songs  
 - Add all songs with a certain tag to queue (aka create playlists)  

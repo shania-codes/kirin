@@ -33,7 +33,8 @@ Kirinify
 <br><h2>File List</h2>
 <ul>
 {% for file in files %}
-    <li>{{file}}</li><br>
+    <li id="li{{ loop.index0 }}" style="display:inline;">{{file}}</li>
+    <button style="display:inline;" onclick="current_song.src = './static/{{files[loop.index0]}}'"; >Play</button><br>
 {% endfor %}
 </ul>
 
@@ -55,8 +56,13 @@ Kirinify
 
 <script>
     const current_song = document.getElementById("current_song");
-    current_song.src = "./static/{{files[0]}}"; // Set current song to the first file (sorted by ?alphabetical?)
+    current_song.src = "./static/{{files[0]}}"; // Set current song to the first file (sorted ?alphabetically?)
+    let all_songs = [];
+    {% for file in files %}
+    all_songs.push("{{file}}");
+    {% endfor %}
 </script>
+
 
 
 {% endblock %}

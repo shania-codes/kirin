@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 app.secret_key = "worst_admin"
 UPLOAD_FOLDER = "static/music"
-ALLOWED_EXTENSIONS = {"aac", "flac", "m4a", "mp3", "oog", "opus", "wav", "webm"} # https://en.wikipedia.org/wiki/Audio_file_format Added the ones that look familiar
+ALLOWED_EXTENSIONS = {"aac", "flac", "m4a", "mp3", "oog", "opus", "wav"} # https://en.wikipedia.org/wiki/Audio_file_format https://www.iana.org/assignments/media-types/media-types.xhtml#audio
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
@@ -34,6 +34,14 @@ create_db()
 def index():
     if request.method == "POST":
         print(request.form)
+        file = request.files["audio"]
+        if file.filename == "": # if no file is uploaded
+            filename = None 
+        elif file and allowed_file(file.filename): # If the file exists and it has an allowed name and file extension then save it
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            # TODO replace file name with hash of the file to support images that are the same not being duplicated and images of the same name but are different not overwriting each other
+
 
     
 

@@ -1,1 +1,26 @@
-<h1>Test</h1>
+{% extends "base.html" %}
+
+{% block title %}
+Kirinify
+{% endblock %}
+
+{% block header %}
+Kirinify
+{% endblock %}
+
+
+{% block body %}
+<h2>Upload</h2>
+<form method="post" enctype=multipart/form-data>
+    <label>Audio files</label>
+    <input type="file" name="audio" accept="audio/aac, audio/flac, audio/m4a, audio/mp3, audio/ogg, audio/opus, audio/wav"><!--multiple>-->
+    <button  type="submit">Submit</button>
+</form>
+
+
+<br><h2>Play</h2>
+
+
+<br><h2>Queue</h2>
+
+{% endblock %}

@@ -60,6 +60,9 @@ Kirinify
         <input hidden name="file" value="{{file}}">
         <button type="submit">Delete Song</button>
     </form>
+    <form method="get" action="{{url_for('download_song', filename=file)}}">
+        <button type="submit">Download Song</button>
+    </form>
     </li>
     <br>
 {% endfor %}

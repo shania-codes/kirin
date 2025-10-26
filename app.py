@@ -180,6 +180,10 @@ def backup():
 
     return send_file(file, mimetype="application/zip", as_attachment=True, download_name="files.zip")
 
+@app.route("/download/<filename>")
+def download_song(filename):
+    return send_file(os.path.join(UPLOAD_FOLDER, filename), as_attachment=True)
+
 
 
 # Other Functions

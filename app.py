@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, send_file
 import sqlite3
 import os
 from werkzeug.utils import secure_filename
+import io
+import zipfile
 
 app = Flask(__name__)
 app.secret_key = "worst_admin"
@@ -164,6 +166,20 @@ def index():
 
 
     return render_template("index.html", files=files, tags=get_all_tags(), filter_tag=filter_tag, match_mode=match_mode)
+
+
+@app.route("/backup")
+def backup():
+    file = io.BytesIO()
+    with zipfile.ZipFile(file, "w", zipfile.ZIP_DEFLATED) as zf:
+        for filename in os.listdir(UPLOAD_FOLDER):
+            if allowed_file(filename): # so that background.png isn't included or any other future static files
+                file_path = os.path.join(UPLOAD_FOLDER, filename)
+                zf.write(file_path, arcname=filename)
+    file.seek(0)
+
+    return send_file(file, mimetype="application/zip", as_attachment=True, download_name="files.zip")
+
 
 
 # Other Functions

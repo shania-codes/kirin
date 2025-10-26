@@ -41,7 +41,7 @@ create_db()
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        if request.files:
+        if request.form.get("form") == "new_song":
             file = request.files["audio"]
             if file.filename == "": # if no file is uploaded
                 filename = None 

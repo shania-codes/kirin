@@ -12,6 +12,7 @@ Kirinify
 {% block body %}
 <h2>Upload</h2>
 <form method="post" enctype=multipart/form-data>
+    <input hidden name="form" value="new_song">
     <label>Audio files</label>
     <input type="file" name="audio" accept="audio/flac, audio/mp3">
     <button  type="submit">Submit</button>

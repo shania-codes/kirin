@@ -8,10 +8,11 @@ A comfy, autumn themed music player which stores songs locally AND on the server
 - List all music files  
 - Actually play music files  
 - Save song details to DB  
-- 
+- Save added tags to DB
 
 
 ### Planned Features
+- Display tags  
 - If possible remove CSS animation for flashed notifications and with no JS x button to remove the element from DOM
 - Add all songs with a certain tag to queue (aka create playlists)  
 - Add all songs with multiple tags to queue (songs with tag1 AND tag2 only)  

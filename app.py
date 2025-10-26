@@ -24,8 +24,14 @@ def create_db():
     cursor = db.cursor()
 
     # Create tables
-    ## "Queue" (There MUST be a better way to do this?)
-    #cursor.execute("CREATE TABLE IF NOT EXISTS queue (id INTEGER PRIMARY KEY AUTOINCREMENT, file TEXT NOT NULL)")
+    ## Song list
+    cursor.execute("CREATE TABLE IF NOT EXISTS songs (id INTEGER PRIMARY KEY AUTOINCREMENT, filename TEXT NOT NULL)")
+
+    ## song_tags
+    cursor.execute("CREATE TABLE IF NOT EXISTS song_tags (song_id INTEGER, tag_id INTEGER, FOREIGN KEY (song_id) REFERENCES songs(id), FOREIGN KEY (tag_id) REFERENCES tags(id))")
+
+    ## Tags
+    cursor.execute("CREATE TABLE IF NOT EXISTS tags (id INTEGER PRIMARY KEY AUTOINCREMENT, tag TEXT NOT NULL)")
 
     db.commit()
     db.close()

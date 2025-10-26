@@ -5,7 +5,7 @@ Kirinify
 {% endblock %}
 
 {% block header %}
-Kirinify
+Kirinify - JS free, autumn themed, music player with song tags
 {% endblock %}
 
 
@@ -13,55 +13,27 @@ Kirinify
 <h2>Upload</h2>
 <form method="post" enctype=multipart/form-data>
     <label>Audio files</label>
-    <input type="file" name="audio" accept="audio/flac, audio/mp3"><!--multiple>-->
+    <input type="file" name="audio" accept="audio/flac, audio/mp3">
     <button  type="submit">Submit</button>
 </form>
 
 
-<br><h2>Now Playing</h2>
-<div id="now_playing">
-    <audio id="current_song" controls autoplay></audio>
-</div>
-<style>
-    #current_song {
-        border: solid brown 8px;
-        /*padding: 0px;*/
-        border-radius: 90px;
-    }
-</style>
-
-<br><h2>File List</h2>
+<br><h2>Songs</h2>
 <ul>
 {% for file in files %}
-    <li id="li{{ loop.index0 }}" style="display:inline;">{{file}}</li>
-    <button style="display:inline;" onclick="current_song.src = './static/{{files[loop.index0]}}'"; >Play</button><br>
-{% endfor %}
-</ul>
-
-
-{#
-<br><h2>Queue</h2>
-<ul>
-{% for song in queue %}
-    <li>{{song}}</li>
-    Add id=song_{id}, play button, add/remove from queue button, move up/down in queue buttons
+    <li id="li{{ loop.index0 }}" style="display:inline;">{{file}}
+    <audio controls src="./static/{{file}}"></audio>
+    <form method="post">
+        <input hidden name="form" value="add_tag_to_song">
+        <input hidden name="file" value="{{file}}">
+        <label>Tag name <small>(case-sensitive?)</small></label>
+        <input id="tag" type="text" name="tag">
+        <button type="submit">Add Tag</button>
+    </form>
+    </li>
     <br>
 {% endfor %}
 </ul>
-#}
-
-
-
-
-
-<script>
-    const current_song = document.getElementById("current_song");
-    current_song.src = "./static/{{files[0]}}"; // Set current song to the first file (sorted ?alphabetically?)
-    let all_songs = [];
-    {% for file in files %}
-    all_songs.push("{{file}}");
-    {% endfor %}
-</script>
 
 
 

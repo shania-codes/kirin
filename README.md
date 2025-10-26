@@ -2,9 +2,10 @@
 A comfy, autumn themed music player which stores songs locally AND on the server it's hosted on, therefore it works offline. Furthermore you can modify the metadata of the music files (such as genre,artist,album name, release date, etc...). Also you can add tags to group them and modularly create playlists for example you might have a tag for My Little Pony music and another tag for high BPM songs then you can on the spot create a song queue comprised only of MLP songs that are also high BPM (or a specific genre, mood, etc).
 
 ## Features
+- No JS  
 - Comfy Autumn theme  
-- Save music files to server
-- List all music files 
+- Save music files to server  
+- List all music files  
 - Actually play music files  
 
 ### Planned Features

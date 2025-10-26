@@ -42,13 +42,18 @@ create_db()
 def index():
     if request.method == "POST":
         print(request.form)
-        file = request.files["audio"]
-        if file.filename == "": # if no file is uploaded
-            filename = None 
-        elif file and allowed_file(file.filename): # If the file exists and it has an allowed name and file extension then save it
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            # TODO make sure a file with the same name doesn't exist and get's replaced by new file (this also wastes bandwidth)
+        if request.files:
+            file = request.files["audio"]
+            if file.filename == "": # if no file is uploaded
+                filename = None 
+            elif file and allowed_file(file.filename): # If the file exists and it has an allowed name and file extension then save it
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                # TODO make sure a file with the same name doesn't exist and get replaced
+
+        if request.form["form"] == "add_tag_to_song":
+
+
 
 
     

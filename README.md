@@ -1,5 +1,5 @@
 # Kirinify
-A comfy, autumn themed music player ~~which stores songs locally AND on the server it's hosted on, therefore it works offline. Furthermore you can modify the metadata of the music files (such as genre,artist,album name, release date, etc...).~~ Also you can add tags to group them, ~~and modularly create playlists~~ for example you might have a tag for My Little Pony music and another tag for happy songs then you can on the spot create a song ~~queue~~ list comprised only of MLP songs that are also happy (or a specific genre, mood, etc tags are fully customisable).
+A comfy, autumn themed music player ~~which stores songs locally AND on the server it's hosted on, therefore it works offline. Furthermore you can modify the metadata of the music files (such as genre,artist,album name, release date, etc...).~~ Also you can add tags to group them, ~~and modularly create playlists~~ for example you might have a tag for My Little Pony music and another tag for fast-paced songs then you can on the spot create a song ~~queue~~ list comprised only of MLP songs that are also fast-paced (or a specific genre, mood, etc tags are fully customisable).
 No queue is not a bug it's a feature actually, it's MINDFUL COMPUTING you have to pick each song to listen to one at a time and will be present while listening to them. 
 
 ## Features
@@ -26,6 +26,7 @@ No queue is not a bug it's a feature actually, it's MINDFUL COMPUTING you have t
 - Sort/Filter by upload date, file size, and duration  
 - Delete all songs with a certain tag  
 - Frontend.  
+- Make tags not be case sensitive
 
 - Built in archive button to "delete" songs you don't like anymore (can be undone).  
 - Modify metadata of those files (to change genre and other song details)  

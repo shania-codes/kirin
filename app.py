@@ -142,16 +142,20 @@ def index():
 
             db = get_db()
             cursor = db.cursor()
-
-
             cursor.execute("DELETE FROM song_tags WHERE tag_id = ?", (tag_id))
             cursor.execute("DELETE FROM tags WHERE id = ?", (tag_id))
             db.commit()
             db.close()
             flash("Tag deleted.")
 
+    filter_tag = request.args.get("filter_tag")
+    if filter_tag and not filter_tag == None:
+        files = get_songs_by_tag(filter_tag) # only songs with this tag
+    else:
+        files = get_uploaded_files() # all songs
 
-    return render_template("index.html", files=get_uploaded_files(), tags=get_all_tags())
+
+    return render_template("index.html", files=files, tags=get_all_tags(), filter_tag=filter_tag)
 
 
 # Other Functions
@@ -162,6 +166,7 @@ def get_uploaded_files():
             files.append(filename)
     return files
 
+
 def get_all_tags():
     db = get_db()
     cursor = db.cursor()
@@ -169,3 +174,18 @@ def get_all_tags():
     tags = cursor.fetchall()
     db.close()
     return tags
+
+
+def get_songs_by_tag(tag_name):
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("""
+        SELECT s.filename 
+        FROM songs s
+        JOIN song_tags st ON s.id = st.song_id
+        JOIN tags t ON st.tag_id = t.id
+        WHERE t.tag = ?
+    """, (tag_name,))
+    results = [row[0] for row in cursor.fetchall()]
+    db.close()
+    return results

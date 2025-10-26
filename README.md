@@ -11,6 +11,7 @@ A comfy, autumn themed music player which stores songs locally AND on the server
 - Save added tags to DB
 - Delete songs
 - Display and delete all tags
+- Filter songs by a single tag
 
 ### Planned Features
 - Create a music queue and allow you to select multiple songs and add to the queue  

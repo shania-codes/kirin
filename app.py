@@ -137,10 +137,21 @@ def index():
             else:
                 flash("Song not found.") # Useless?
 
+        if request.form.get("form") == "delete_tag":
+            tag_id = request.form["tag_id"]
+
+            db = get_db()
+            cursor = db.cursor()
 
 
+            cursor.execute("DELETE FROM song_tags WHERE tag_id = ?", (tag_id))
+            cursor.execute("DELETE FROM tags WHERE id = ?", (tag_id))
+            db.commit()
+            db.close()
+            flash("Tag deleted.")
 
-    return render_template("index.html", files=get_uploaded_files())
+
+    return render_template("index.html", files=get_uploaded_files(), tags=get_all_tags())
 
 
 # Other Functions
@@ -150,3 +161,11 @@ def get_uploaded_files():
         if allowed_file(filename):
             files.append(filename)
     return files
+
+def get_all_tags():
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT id, tag FROM tags")
+    tags = cursor.fetchall()
+    db.close()
+    return tags

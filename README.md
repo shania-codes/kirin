@@ -10,14 +10,12 @@ A comfy, autumn themed music player which stores songs locally AND on the server
 - Save song details to DB  
 - Save added tags to DB
 - Delete songs
-
+- Display and delete all tags
 
 ### Planned Features
-- Display tags  
-- If possible remove CSS animation for flashed notifications and with no JS x button to remove the element from DOM
+- Create a music queue and allow you to select multiple songs and add to the queue  
 - Add all songs with a certain tag to queue (aka create playlists)  
 - Add all songs with multiple tags to queue (songs with tag1 AND tag2 only)  
-- Create a music queue and allow you to select multiple songs and add to the queue  
 - Create a single file archive which you can then download and copy to other places  
 - Built in archive button to "delete" songs you don't like anymore (can be undone).  
 

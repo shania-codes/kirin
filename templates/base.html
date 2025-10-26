@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<h1>{% block header %}Header{% endblock %}</h1><hr>
+<h1>{% block header %}Header{% endblock %}</h1><hr style="margin: 0px;">
 {% with messages = get_flashed_messages() %}
 {% if messages %}
 <ul style="list-style-type: none;padding-left: 0;margin: 0;animation: fadeout-collapse 5s ease-out forwards;">{# Flashed messages #}

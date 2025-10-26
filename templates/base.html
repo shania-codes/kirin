@@ -16,38 +16,30 @@
 {% if messages %}
 <ul style="list-style-type: none;padding-left: 0;">{# Flashed messages #}
     {% for message in messages %}
-    <li class="flash-message">{{ message }}</li>
+    <li class="flash-message">{{ message }}</li><br>
     {% endfor %}
 </ul>
 <style>
 .flash-message {
   background: #ffc917;
   width:fit-content;
-  border: 4px solid white ;
-  padding: 4px;
-  font-size: 1.5em;
+  border: 5px solid white ;
+  border-radius: 45px;
+  padding: 20px;
+  font-weight: bold;
   overflow: hidden;
-  animation: fadeout-collapse 4s ease-out forwards;
+  animation: fadeout-collapse 5s ease-out forwards;
 }
-
 @keyframes fadeout-collapse {
   0% {
     opacity: 1;
-    max-height: 50px;
-    margin-bottom: 6px;
-    padding: 4px;
   }
-  80% {
+  70% {
     opacity: 1;
-    max-height: 50px;
-    margin-bottom: 6px;
-    padding: 4px;
   }
   100% {
     opacity: 0;
-    max-height: 0;
-    padding: 0;
-    margin-bottom: 0;
+    display: none;
   }
 }
 </style>

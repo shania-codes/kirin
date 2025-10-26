@@ -9,6 +9,7 @@ A comfy, autumn themed music player which stores songs locally AND on the server
 - Actually play music files  
 - Save song details to DB  
 - Save added tags to DB
+- Delete songs
 
 
 ### Planned Features

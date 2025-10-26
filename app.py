@@ -64,8 +64,7 @@ def index():
 
                 # Save file to server
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                flash((str(filename)+" saved!"))
-                
+                flash((str(filename)+" saved!"))         
 
         if request.form.get("form") == "add_tag_to_song":
             filename = request.form["file"]
@@ -111,8 +110,34 @@ def index():
 
             db.commit()
             db.close()
-
             
+        if request.form.get("form") == "delete_song":
+            filename = request.form["file"]
+
+            db = get_db()
+            cursor = db.cursor()
+
+            cursor.execute("SELECT id FROM songs WHERE filename = ?", (filename, ))
+            song = cursor.fetchone()
+
+            if song:
+                song_id = song[0]
+
+                # Delete added tags
+                cursor.execute("DELETE FROM song_tags WHERE song_id = ?", (song_id,))
+                # Delete song in DB
+                cursor.execute("DELETE FROM songs WHERE id = ?", (song_id,))
+                db.commit()
+                db.close()
+                # Delete song file
+                if os.path.exists(os.path.join(app.config["UPLOAD_FOLDER"], filename)):
+                    os.remove(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+                    flash("Song deleted.")
+
+            else:
+                flash("Song not found.") # Useless?
+
+
 
 
     return render_template("index.html", files=get_uploaded_files())

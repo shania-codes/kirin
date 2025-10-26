@@ -31,6 +31,11 @@ Kirinify
         <input id="tag" type="text" name="tag" required>
         <button type="submit">Add Tag</button>
     </form>
+    <form method="post">
+        <input hidden name="form" value="delete_song">
+        <input hidden name="file" value="{{file}}">
+        <button type="submit">Delete Song</button>
+    </form>
     </li>
     <br>
 {% endfor %}

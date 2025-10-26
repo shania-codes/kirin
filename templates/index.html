@@ -5,7 +5,7 @@ Kirinify
 {% endblock %}
 
 {% block header %}
-Kirinify - JS free, autumn themed, music player with song tags
+Kirinify
 {% endblock %}
 
 
@@ -27,7 +27,7 @@ Kirinify - JS free, autumn themed, music player with song tags
         <input hidden name="form" value="add_tag_to_song">
         <input hidden name="file" value="{{file}}">
         <label>Tag name <small>(case-sensitive?)</small></label>
-        <input id="tag" type="text" name="tag">
+        <input id="tag" type="text" name="tag" required>
         <button type="submit">Add Tag</button>
     </form>
     </li>

@@ -148,14 +148,22 @@ def index():
             db.close()
             flash("Tag deleted.")
 
+
+    # Filtering Songs/Audio files
     filter_tag = request.args.get("filter_tag")
-    if filter_tag and not filter_tag == None:
-        files = get_songs_by_tag(filter_tag) # only songs with this tag
+    match_mode = request.args.get("match_mode", "any")
+
+    if filter_tag:
+        tag_list = [t.strip() for t in filter_tag.split(",") if t.strip()]
+        if match_mode == "all":
+            files = get_songs_by_multiple_tags(tag_list) # songs with all selected tags
+        else: # match_mode == any
+            files = get_songs_by_tags(tag_list) # only songs with these tags
     else:
         files = get_uploaded_files() # all songs
 
 
-    return render_template("index.html", files=files, tags=get_all_tags(), filter_tag=filter_tag)
+    return render_template("index.html", files=files, tags=get_all_tags(), filter_tag=filter_tag, match_mode=match_mode)
 
 
 # Other Functions
@@ -176,16 +184,39 @@ def get_all_tags():
     return tags
 
 
-def get_songs_by_tag(tag_name):
+def get_songs_by_tags(tags): # Includes all songs with any 1 of the tags
     db = get_db()
     cursor = db.cursor()
-    cursor.execute("""
-        SELECT s.filename 
+
+    placeholders = ",".join("?" * len(tags))
+
+    query = f"""
+        SELECT DISTINCT s.filename 
         FROM songs s
         JOIN song_tags st ON s.id = st.song_id
         JOIN tags t ON st.tag_id = t.id
-        WHERE t.tag = ?
-    """, (tag_name,))
+        WHERE t.tag IN ({placeholders})
+    """
+    cursor.execute(query, tags)
+    results = [row[0] for row in cursor.fetchall()]
+    db.close()
+    return results
+
+def get_songs_by_multiple_tags(tags): # Includes songs with all selected tags
+    db = get_db()
+    cursor = db.cursor()
+
+    placeholders = ",".join("?" * len(tags))
+    query = f"""
+        SELECT s.filename
+        FROM songs s
+        JOIN song_tags st ON s.id = st.song_id
+        JOIN tags t ON st.tag_id = t.id
+        WHERE t.tag IN ({placeholders})
+        GROUP BY s.id
+        HAVING COUNT(DISTINCT t.tag) = ?
+    """
+    cursor.execute(query, (*tags, len(tags)))
     results = [row[0] for row in cursor.fetchall()]
     db.close()
     return results

@@ -19,18 +19,30 @@ Kirinify
 </form>
 
 
-<h2>Filter songs by tag</h2>
+<h2>Filter songs by tags</h2>
 <form method="get">
-    <label>Select Tag:</label>
+    <label>Select Tags:<small>(comma_seperated,case_sensitive)</small></label>
     <input type="text" name="filter_tag">
+    <select name="match_mode">
+        <option value="any" {%if match_mode == "any"%}selected{%endif%}>Any of these tags</option>
+        <option value="all" {%if match_mode =="all"%}selected{%endif%}>All of these tags</option>
+    </select>
     <button type="submit">Filter</button>
 </form>
 
 
 {% if filter_tag %}
-<p>Only showing songs with tag: {{filter_tag}}</p>
-<a href="/">Clear Filters</a>
+<p>
+    Showing songs with 
+    {% if match_mode == 'all' %}
+        <strong>all</strong> of these tags:
+    {% else %}
+        <strong>any</strong> of these tags:
+    {% endif %}
+    "{{ filter_tag }}"
+</p>
 {% endif %}
+
 <br><h2>Songs</h2>
 <ul>
 {% for file in files %}
